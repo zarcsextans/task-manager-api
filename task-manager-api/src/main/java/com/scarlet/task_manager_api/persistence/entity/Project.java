@@ -11,27 +11,29 @@ public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private Integer id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "description")
     private String description;
 
+    @Column(name = "status")
     private String status;
 
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-
-    // Relación con tareas
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Task> tasks;
 
-
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
