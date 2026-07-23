@@ -1,7 +1,7 @@
 package com.scarlet.task_manager_api;
 
 import com.scarlet.task_manager_api.persistence.entity.Project;
-import com.scarlet.task_manager_api.repository.ProjectRepository;
+import com.scarlet.task_manager_api.persistence.repository.ProjectRepository;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

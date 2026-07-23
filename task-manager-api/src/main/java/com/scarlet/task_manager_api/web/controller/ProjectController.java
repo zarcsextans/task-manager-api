@@ -59,7 +59,7 @@ public class ProjectController {
     @GetMapping("/{id}")
     public ResponseEntity<Project> getProjectById(
             @Parameter(description = "Project ID")
-            @PathVariable Long id) {
+            @PathVariable Integer id) {
 
         return projectService.getProjectById(id)
                 .map(ResponseEntity::ok)
@@ -98,7 +98,7 @@ public class ProjectController {
     @PutMapping("/{id}")
     public ResponseEntity<Project> updateProject(
             @Parameter(description = "Project ID")
-            @PathVariable Long id,
+            @PathVariable Integer id,
             @RequestBody Project project) {
 
         try {
@@ -125,7 +125,7 @@ public class ProjectController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProject(
             @Parameter(description = "Project ID")
-            @PathVariable Long id) {
+            @PathVariable Integer id) {
 
         try {
 
