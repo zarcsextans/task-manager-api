@@ -23,6 +23,9 @@ public class TaskRequest {
     @Schema(example = "1")
     private Integer projectId;
 
+    @Schema(example = "1")
+    private Integer categoryId;
+
 
 
     public String getTitle() {
@@ -72,5 +75,14 @@ public class TaskRequest {
 
     public void setProjectId(Integer projectId) {
         this.projectId = projectId;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 }

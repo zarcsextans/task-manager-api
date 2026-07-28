@@ -27,6 +27,11 @@ public class Task {
     @JoinColumn(name = "project_id")
     private Project project;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Categoria categoria;
+
+
     public Integer getId() {
         return id;
     }
@@ -73,5 +78,12 @@ public class Task {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

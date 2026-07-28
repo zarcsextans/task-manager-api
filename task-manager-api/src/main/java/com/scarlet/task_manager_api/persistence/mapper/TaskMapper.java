@@ -8,20 +8,17 @@ import org.mapstruct.Mapping;
 public interface TaskMapper {
 
 
-    @Mapping(
-            source = "project.id",
-            target = "projectId"
-    )
+    @Mapping(target = "projectId", source = "project.id")
+    @Mapping(target = "categoryId", source = "categoria.id")
     Task toDomain(
             com.scarlet.task_manager_api.persistence.entity.Task entity
     );
 
 
-    @Mapping(
-            target = "project",
-            ignore = true
-    )
+    @Mapping(target = "project", ignore = true)
+    @Mapping(target = "categoria", ignore = true)
     com.scarlet.task_manager_api.persistence.entity.Task toEntity(
             Task domain
     );
+
 }

@@ -1,54 +1,83 @@
 package com.scarlet.task_manager_api.service;
 
-import com.scarlet.task_manager_api.persistence.entity.Project;
-import com.scarlet.task_manager_api.repository.ProjectRepository;
+import com.scarlet.task_manager_api.domain.Project;
+import com.scarlet.task_manager_api.persistence.mapper.ProjectMapper;
+import com.scarlet.task_manager_api.persistence.repository.ProjectRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
+    private final ProjectMapper projectMapper;
 
-    public ProjectService(ProjectRepository projectRepository) {
+
+    public ProjectService(
+            ProjectRepository projectRepository,
+            ProjectMapper projectMapper
+    ) {
         this.projectRepository = projectRepository;
+        this.projectMapper = projectMapper;
     }
+
 
     public List<Project> getAllProjects() {
-        return projectRepository.findAll();
+
+        return projectRepository.findAll()
+                .stream()
+                .map(projectMapper::toDomain)
+                .collect(Collectors.toList());
     }
 
 
-    public Optional<Project> getProjectById(Long id) {
-        return projectRepository.findById(id);
+    public Optional<Project> getProjectById(Integer id) {
+
+        return projectRepository.findById(id)
+                .map(projectMapper::toDomain);
     }
 
 
     public Project createProject(Project project) {
-        return projectRepository.save(project);
+
+        com.scarlet.task_manager_api.persistence.entity.Project entity =
+                projectMapper.toEntity(project);
+
+        com.scarlet.task_manager_api.persistence.entity.Project saved =
+                projectRepository.save(entity);
+
+        return projectMapper.toDomain(saved);
     }
 
 
-    public Project updateProject(Long id, Project projectDetails) {
+    public Project updateProject(Integer id, Project projectDetails) {
 
-        Project project = projectRepository.findById(id)
+        var entity = projectRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Project not found"));
 
-        project.setName(projectDetails.getName());
-        project.setDescription(projectDetails.getDescription());
-        project.setStatus(projectDetails.getStatus());
 
-        return projectRepository.save(project);
+        entity.setName(projectDetails.getName());
+        entity.setDescription(projectDetails.getDescription());
+        entity.setStatus(projectDetails.getStatus());
+
+
+        var updatedEntity = projectRepository.save(entity);
+
+
+        return projectMapper.toDomain(updatedEntity);
     }
 
 
-    public void deleteProject(Long id) {
+    public void deleteProject(Integer id) {
 
-        Project project = projectRepository.findById(id)
+        var entity = projectRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Project not found"));
 
-        projectRepository.delete(project);
+
+        projectRepository.delete(entity);
     }
 }

@@ -83,6 +83,7 @@ public class TaskController {
         task.setPriority(request.getPriority());
         task.setCompleted(request.getCompleted());
         task.setProjectId(request.getProjectId());
+        task.setCategoryId(request.getCategoryId());
 
 
         Task savedTask = taskService.createTask(task);
@@ -117,6 +118,7 @@ public class TaskController {
             task.setPriority(request.getPriority());
             task.setCompleted(request.getCompleted());
             task.setProjectId(request.getProjectId());
+            task.setCategoryId(request.getCategoryId());
 
 
             Task updatedTask = taskService.updateTask(id, task);

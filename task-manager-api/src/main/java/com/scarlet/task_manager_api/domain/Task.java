@@ -8,6 +8,16 @@ public class Task {
     private String priority;
     private String title;
     private Integer projectId;
+    private Integer categoryId;
+
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
 
 
     public Integer getId() {
