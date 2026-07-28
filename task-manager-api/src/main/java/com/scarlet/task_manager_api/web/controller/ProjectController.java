@@ -1,6 +1,7 @@
 package com.scarlet.task_manager_api.web.controller;
 
-import com.scarlet.task_manager_api.persistence.entity.Project;
+import com.scarlet.task_manager_api.web.dto.ProjectRequest;
+import com.scarlet.task_manager_api.domain.Project;
 import com.scarlet.task_manager_api.service.ProjectService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -77,9 +78,18 @@ public class ProjectController {
     })
     @PostMapping
     public ResponseEntity<Project> createProject(
-            @RequestBody Project project) {
+            @RequestBody ProjectRequest request) {
+
+
+        Project project = new Project();
+
+        project.setName(request.getName());
+        project.setDescription(request.getDescription());
+        project.setStatus(request.getStatus());
+
 
         Project savedProject = projectService.createProject(project);
+
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -99,9 +109,16 @@ public class ProjectController {
     public ResponseEntity<Project> updateProject(
             @Parameter(description = "Project ID")
             @PathVariable Integer id,
-            @RequestBody Project project) {
+            @RequestBody ProjectRequest request) {
 
         try {
+
+            Project project = new Project();
+
+            project.setName(request.getName());
+            project.setDescription(request.getDescription());
+            project.setStatus(request.getStatus());
+
 
             Project updatedProject = projectService.updateProject(id, project);
 

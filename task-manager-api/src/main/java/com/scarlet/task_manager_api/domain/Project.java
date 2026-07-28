@@ -1,16 +1,34 @@
 package com.scarlet.task_manager_api.domain;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class Project {
 
+    @Schema(example = "1")
     private Integer id;
+
+
+    @Schema(example = "Sistema de Ventas")
     private String name;
+
+
+    @Schema(example = "API para administrar productos y ventas")
     private String description;
+
+
+    @Schema(example = "En proceso")
     private String status;
+
+
+    @Schema(example = "2026-07-27T10:00:00")
     private LocalDateTime createdAt;
+
+
     private List<Task> tasks;
+
 
     public Integer getId() {
         return id;
@@ -20,6 +38,7 @@ public class Project {
         this.id = id;
     }
 
+
     public String getName() {
         return name;
     }
@@ -27,6 +46,7 @@ public class Project {
     public void setName(String name) {
         this.name = name;
     }
+
 
     public String getDescription() {
         return description;
@@ -36,6 +56,7 @@ public class Project {
         this.description = description;
     }
 
+
     public String getStatus() {
         return status;
     }
@@ -44,6 +65,7 @@ public class Project {
         this.status = status;
     }
 
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -51,6 +73,7 @@ public class Project {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
 
     public List<Task> getTasks() {
         return tasks;
