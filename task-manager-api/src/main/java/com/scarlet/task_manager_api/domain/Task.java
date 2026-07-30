@@ -1,19 +1,56 @@
 package com.scarlet.task_manager_api.domain;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public class Task {
 
+    @Schema(example = "1")
     private Integer id;
+
+
+    @Schema(example = "false")
     private Boolean completed;
+
+
+    @Schema(example = "Crear autenticación con JWT")
     private String description;
+
+
+    @Schema(example = "HIGH")
     private String priority;
+
+
+    @Schema(example = "Implementar login")
     private String title;
+
+
+    @Schema(example = "32")
     private Integer projectId;
+
+
+    @Schema(example = "1")
     private Integer categoryId;
+
+
+    @Schema(example = "2")
+    private Integer userId;
+
+
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
 
     public Integer getCategoryId() {
         return categoryId;
     }
+
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;

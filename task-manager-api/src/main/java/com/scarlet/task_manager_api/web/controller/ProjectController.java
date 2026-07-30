@@ -86,6 +86,7 @@ public class ProjectController {
         project.setName(request.getName());
         project.setDescription(request.getDescription());
         project.setStatus(request.getStatus());
+        project.setUserId(request.getUserId());
 
 
         Project savedProject = projectService.createProject(project);
@@ -118,6 +119,7 @@ public class ProjectController {
             project.setName(request.getName());
             project.setDescription(request.getDescription());
             project.setStatus(request.getStatus());
+            project.setUserId(request.getUserId());
 
 
             Project updatedProject = projectService.updateProject(id, project);

@@ -31,6 +31,12 @@ public class Project {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Usuario usuario;
+
+
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Task> tasks;
 
@@ -74,6 +80,15 @@ public class Project {
         this.createdAt = createdAt;
     }
 
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
     public List<Task> getTasks() {
         return tasks;
     }
@@ -81,4 +96,5 @@ public class Project {
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
+
 }

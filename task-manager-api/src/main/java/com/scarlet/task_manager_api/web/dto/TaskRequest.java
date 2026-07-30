@@ -20,11 +20,16 @@ public class TaskRequest {
     private Boolean completed;
 
 
-    @Schema(example = "1")
+    @Schema(example = "32")
     private Integer projectId;
+
 
     @Schema(example = "1")
     private Integer categoryId;
+
+
+    @Schema(example = "2")
+    private Integer userId;
 
 
 
@@ -77,6 +82,7 @@ public class TaskRequest {
         this.projectId = projectId;
     }
 
+
     public Integer getCategoryId() {
         return categoryId;
     }
@@ -84,5 +90,15 @@ public class TaskRequest {
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
+    }
+
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

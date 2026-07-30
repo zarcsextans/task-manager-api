@@ -10,24 +10,33 @@ public class Project {
     @Schema(example = "1")
     private Integer id;
 
-
-    @Schema(example = "Sistema de Ventas")
+    @Schema(example = "Sistema Biblioteca")
     private String name;
 
-
-    @Schema(example = "API para administrar productos y ventas")
+    @Schema(example = "API para gestionar libros")
     private String description;
-
 
     @Schema(example = "En proceso")
     private String status;
 
-
-    @Schema(example = "2026-07-27T10:00:00")
+    @Schema(example = "2026-07-30T10:00:00")
     private LocalDateTime createdAt;
 
 
+    @Schema(example = "2")
+    private Integer userId;
+
+
     private List<Task> tasks;
+
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
 
     public Integer getId() {

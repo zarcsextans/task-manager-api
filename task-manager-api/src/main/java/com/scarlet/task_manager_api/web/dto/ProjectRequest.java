@@ -14,6 +14,11 @@ public class ProjectRequest {
     private String status;
 
 
+    @Schema(example = "2")
+    private Integer userId;
+
+
+
     public String getName() {
         return name;
     }
@@ -38,5 +43,15 @@ public class ProjectRequest {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

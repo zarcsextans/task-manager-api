@@ -11,25 +11,38 @@ public class Task {
     @Column(name = "id")
     private Integer id;
 
+
     @Column(name = "completed")
     private Boolean completed;
+
 
     @Column(name = "description")
     private String description;
 
+
     @Column(name = "priority")
     private String priority;
 
+
     @Column(name = "title")
     private String title;
+
 
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
 
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Categoria categoria;
+
+
+    // Nueva relación con Usuario
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Usuario usuario;
+
 
 
     public Integer getId() {
@@ -40,6 +53,7 @@ public class Task {
         this.id = id;
     }
 
+
     public Boolean getCompleted() {
         return completed;
     }
@@ -47,6 +61,7 @@ public class Task {
     public void setCompleted(Boolean completed) {
         this.completed = completed;
     }
+
 
     public String getDescription() {
         return description;
@@ -56,6 +71,7 @@ public class Task {
         this.description = description;
     }
 
+
     public String getPriority() {
         return priority;
     }
@@ -63,6 +79,7 @@ public class Task {
     public void setPriority(String priority) {
         this.priority = priority;
     }
+
 
     public String getTitle() {
         return title;
@@ -72,6 +89,7 @@ public class Task {
         this.title = title;
     }
 
+
     public Project getProject() {
         return project;
     }
@@ -79,11 +97,22 @@ public class Task {
     public void setProject(Project project) {
         this.project = project;
     }
+
+
     public Categoria getCategoria() {
         return categoria;
     }
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

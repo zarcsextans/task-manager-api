@@ -84,6 +84,7 @@ public class TaskController {
         task.setCompleted(request.getCompleted());
         task.setProjectId(request.getProjectId());
         task.setCategoryId(request.getCategoryId());
+        task.setUserId(request.getUserId());
 
 
         Task savedTask = taskService.createTask(task);
@@ -119,6 +120,7 @@ public class TaskController {
             task.setCompleted(request.getCompleted());
             task.setProjectId(request.getProjectId());
             task.setCategoryId(request.getCategoryId());
+            task.setUserId(request.getUserId());
 
 
             Task updatedTask = taskService.updateTask(id, task);
