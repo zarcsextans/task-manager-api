@@ -44,6 +44,10 @@ public class ProjectService {
 
     public Project createProject(Project project) {
 
+        if (projectRepository.existsByName(project.getName())) {
+            throw new RuntimeException("Project name already exists");
+        }
+
         com.scarlet.task_manager_api.persistence.entity.Project entity =
                 projectMapper.toEntity(project);
 

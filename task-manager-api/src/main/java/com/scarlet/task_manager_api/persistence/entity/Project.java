@@ -6,7 +6,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "projects")
+@Table(
+        name = "projects",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "name")
+        }
+)
 public class Project {
 
     @Id
