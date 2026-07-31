@@ -3,6 +3,8 @@ package com.scarlet.task_manager_api.web.controller;
 import com.scarlet.task_manager_api.domain.User;
 import com.scarlet.task_manager_api.service.UserService;
 import com.scarlet.task_manager_api.web.dto.UserRequest;
+import com.scarlet.task_manager_api.web.dto.UserResponse;
+import com.scarlet.task_manager_api.web.mapper.UserResponseMapper;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,21 +21,29 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final UserResponseMapper userResponseMapper;
+
 
     public UserController(
-            UserService userService
+            UserService userService,
+            UserResponseMapper userResponseMapper
     ) {
         this.userService = userService;
+        this.userResponseMapper = userResponseMapper;
     }
+
 
     @Operation(
             summary = "Get all users",
             description = "Returns a list of all registered users"
     )
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<UserResponse>> getAllUsers() {
 
-        List<User> users = userService.getAllUsers();
+        List<UserResponse> users = userService.getAllUsers()
+                .stream()
+                .map(userResponseMapper::toResponse)
+                .toList();
 
         if (users.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -42,27 +52,30 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
+
     @Operation(
             summary = "Get user by ID",
             description = "Returns a user using its identifier"
     )
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(
+    public ResponseEntity<UserResponse> getUserById(
             @PathVariable Integer id
     ) {
 
         return userService.getUserById(id)
+                .map(userResponseMapper::toResponse)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
 
     }
+
 
     @Operation(
             summary = "Create a user",
             description = "Creates a new user and saves it in the database"
     )
     @PostMapping
-    public ResponseEntity<User> createUser(
+    public ResponseEntity<UserResponse> createUser(
             @RequestBody UserRequest request
     ) {
 
@@ -75,16 +88,17 @@ public class UserController {
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(savedUser);
+                .body(userResponseMapper.toResponse(savedUser));
 
     }
+
 
     @Operation(
             summary = "Update a user",
             description = "Updates an existing user by its ID"
     )
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(
+    public ResponseEntity<UserResponse> updateUser(
 
             @PathVariable Integer id,
 
@@ -99,9 +113,12 @@ public class UserController {
 
         User updatedUser = userService.updateUser(id, user);
 
-        return ResponseEntity.ok(updatedUser);
+        return ResponseEntity.ok(
+                userResponseMapper.toResponse(updatedUser)
+        );
 
     }
+
 
     @Operation(
             summary = "Delete a user",
