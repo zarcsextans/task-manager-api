@@ -5,6 +5,7 @@ import com.scarlet.task_manager_api.persistence.entity.Usuario;
 import com.scarlet.task_manager_api.persistence.mapper.UserMapper;
 import com.scarlet.task_manager_api.persistence.repository.UserRepository;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,15 +16,17 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
-
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public UserService(
             UserRepository userRepository,
-            UserMapper userMapper
+            UserMapper userMapper,
+            PasswordEncoder passwordEncoder
     ) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<User> getAllUsers() {
@@ -46,6 +49,10 @@ public class UserService {
             throw new RuntimeException("Username already exists");
         }
 
+        user.setPassword(
+                passwordEncoder.encode(user.getPassword())
+        );
+
         Usuario entity = userMapper.toEntity(user);
 
         Usuario savedEntity = userRepository.save(entity);
@@ -67,7 +74,10 @@ public class UserService {
         }
 
         entity.setUsername(userDetails.getUsername());
-        entity.setPassword(userDetails.getPassword());
+
+        entity.setPassword(
+                passwordEncoder.encode(userDetails.getPassword())
+        );
 
         Usuario updatedEntity = userRepository.save(entity);
 
@@ -83,5 +93,4 @@ public class UserService {
 
         userRepository.delete(entity);
     }
-
 }
